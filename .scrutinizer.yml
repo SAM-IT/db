@@ -1,10 +1,20 @@
-imports:
-    - php
-
+build:
+    environment:
+        variables:
+            COMPOSER_ROOT_VERSION: 'dev-master'
+        php: "7.4"
+    nodes:
+        analysis:
+            tests:
+                override:
+                    - php-scrutinizer-run
+filter:
+    paths:
+        - "src/*"
+checks:
+    php: true
 tools:
+    php_code_coverage:
+        enabled: true
     external_code_coverage:
-        timeout: 2100 # Timeout in seconds.
-    # disable copy paste detector and similarity analyzer as they have no real value
-    # and a huge bunch of false-positives
-    php_sim: false
-    php_cpd: false
+        timeout: 600
